@@ -1,0 +1,10 @@
+kind: Group
+apiVersion: user.openshift.io/v1
+metadata:
+  name: rhc-admins
+users:
+  - davgordo
+  - nauticalmike
+  - smagnone
+  - VijayManjeti
+  - InfoSec812

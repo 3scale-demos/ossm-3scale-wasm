@@ -1,0 +1,17 @@
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: 3scale
+spec:
+  system:
+    fileStorage:
+      persistentVolumeClaim:
+        storageClassName: ocs-storagecluster-cephfs
+    redisResources:
+      limits:
+        memory: 6Gi
+  backend:
+    redisResources:
+      limits:
+        memory: 6Gi
+  wildcardDomain: <insert wildcard domain>

@@ -1,0 +1,15 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: threescale
+  labels:
+    app: threescale
+spec:
+  realm:
+    id: threescale
+    realm: threescale
+    enabled: True
+    displayName: "Red Hat 3scale Realm"
+  instanceSelector:
+    matchLabels:
+      app: sso

@@ -1,0 +1,13 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+ name: system-entry
+spec:
+ hosts:
+   - system-provider.3scale.svc.cluster.local
+ location: MESH_EXTERNAL
+ ports:
+   - name: http
+     number: 3000
+     protocol: HTTP
+ resolution: DNS

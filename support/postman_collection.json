@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "a9b5e1ae-98c9-4a47-9b8d-511229c4855b",
+		"name": "3scale OSSM BookInfo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OIDC-Bookinfo-OSSM-Auth Flow",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "https://{{keycloak-url}}/auth/realms/threescale/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://{{keycloak-url}}/auth/realms/threescale/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "5d5c25be0234c3f27f75cf1a6e4c2fc7",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "c3b190ec",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "bearer",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://istio-ingressgateway-istio-system.apps.cluster-t685c.t685c.sandbox897.opentlc.com/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"istio-ingressgateway-istio-system",
+						"apps",
+						"cluster-t685c",
+						"t685c",
+						"sandbox897",
+						"opentlc",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "keycloak-url",
+			"value": "keycloak-keycloak.apps.cluster-t685c.t685c.sandbox897.opentlc.com",
+			"type": "string"
+		}
+	]
+}

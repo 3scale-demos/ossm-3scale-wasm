@@ -1,0 +1,14 @@
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: bookinfo-oidc
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: productpage
+  jwtRules:
+  - issuer: >-
+      https://<replace keycloak URL>/auth/realms/threescale
+    jwksUri: >-
+      https://<replace keycloak URL>/auth/realms/threescale/protocol/openid-connect/certs

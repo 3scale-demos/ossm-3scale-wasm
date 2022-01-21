@@ -1,0 +1,54 @@
+apiVersion: maistra.io/v1
+kind: ServiceMeshExtension
+metadata:
+ name: bookinfo-oidc
+ namespace: bookinfo
+spec:
+ image: 'registry.redhat.io/openshift-service-mesh/3scale-auth-wasm-rhel8:0.0.1'
+ phase: PostAuthZ
+ priority: 100
+ workloadSelector:
+   labels:
+     app: productpage
+ config:
+   api: v1
+   system:
+     name: system
+     token: wcP4mgGKHrUMcksl
+     upstream:
+       name: >-
+         outbound|3000||system-provider.3scale.svc.cluster.local
+       timeout: 5000
+       url: 'http://system-provider.3scale.svc.cluster.local'
+   backend:
+     extensions:
+       - no_body
+     name: backend
+     upstream:
+       name: >-
+         outbound|3000||backend-listener.3scale.svc.cluster.local
+       timeout: 5000
+       url: 'http://backend-listener.3scale.svc.cluster.local'
+   services:
+    - id: '3'
+      token: c291e82e450aa28c3251ec846a6736e48639526592c210eff2025245ca85533d
+      authorities:
+        - '*'
+      credentials:
+        app_id:
+          - filter:
+              path:
+                - envoy.filters.http.jwt_authn
+                - "0"
+              keys:
+                - azp
+              ops:
+                - take:
+                    head: 1
+      mapping_rules:
+        - method: GET
+          pattern: /
+          usages:
+            - delta: 1
+              name: hits
+ 

@@ -1,0 +1,27 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: user1
+  labels:
+    app: threescale
+spec:
+  user:
+    username: user1
+    email: user1@openshift.opentlc.com
+    enabled: true
+    emailVerified : true
+    credentials:
+      - type: password
+        value: openshift
+    clientRoles:
+      account:
+        - manage-account
+        - view-profile
+      realm-management:
+        - manage-clients
+        - manage-users
+        - manage-realm
+        - realm-admin
+  realmSelector:
+    matchLabels:
+      app: threescale

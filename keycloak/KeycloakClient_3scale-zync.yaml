@@ -1,0 +1,23 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: 3scale-zync
+  labels:
+    app: threescale
+spec:
+  client:
+    clientId: 3scale-zync
+    secret: zync-secret
+    clientAuthenticatorType: client-secret
+    protocol: openid-connect
+    directAccessGrantsEnabled: false
+    standardFlowEnabled: false
+    serviceAccountsEnabled: true
+    defaultClientScopes:
+      - email
+      - profiles
+      - roles
+      - web-origins
+  realmSelector:
+    matchLabels:
+      app: threescale

@@ -1,0 +1,63 @@
+apiVersion: maistra.io/v1
+kind: ServiceMeshExtension
+metadata:
+ name: bookinfo
+spec:
+ image: 'quay.io/3scale/threescale-wasm-auth@sha256:c26a879dcadbf1ad6f693d62b327685202bacade36cebca24e98e9d0f0a17e1f'
+ phase: PostAuthZ
+ priority: 100
+ workloadSelector:
+   labels:
+     app: productpage
+ config:
+   api: v1
+   system:
+     name: system
+     token: VDG2U6c9kXwdetUH
+     upstream:
+       name: >-
+         outbound|3000||system-provider.3scale.svc.cluster.local
+       timeout: 5000
+       url: 'http://system-provider.3scale.svc.cluster.local'
+   backend:
+     extensions:
+       - no_body
+     name: backend
+     upstream:
+       name: >-
+         outbound|3000||backend-listener.3scale.svc.cluster.local
+       timeout: 5000
+       url: 'http://backend-listener.3scale.svc.cluster.local'
+   services:
+     - id: '3'
+       token: cf939c57f946bb3c809508caabeac45db51782f1c671e4a2dd2dad57d29ba394
+       authorities:
+         - '*'
+       credentials:
+         app_id:
+           - header:
+               keys:
+                 - app_id
+           - query_string:
+               keys:
+                 - app_id
+         app_key:
+           - header:
+               keys:
+                 - app_key
+           - query_string:
+               keys:
+                 - app_key
+         user_key:
+           - query_string:
+               keys:
+                 - user_key
+           - header:
+               keys:
+                 - user_key
+       mapping_rules:
+         - method: GET
+           pattern: /
+           usages:
+             - delta: 1
+               name: hits

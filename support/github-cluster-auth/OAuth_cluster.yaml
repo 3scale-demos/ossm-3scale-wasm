@@ -1,0 +1,23 @@
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - htpasswd:
+        fileData:
+          name: htpasswd-secret
+      mappingMethod: claim
+      name: htpasswd_provider
+      type: HTPasswd
+    - github:
+        clientID: < client ID >
+        clientSecret:
+          name: < name of secret >
+        hostname: ''
+        organizations:
+          - rhc-na-sm3scale-team
+        teams: []
+      mappingMethod: claim
+      name: github
+      type: GitHub
