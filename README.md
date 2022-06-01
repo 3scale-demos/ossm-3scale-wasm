@@ -36,6 +36,8 @@ oc get storageclasses
 
 Install 3scale operator into `3scale` namespace. (Create new namespace)
 
+![3scale operator](support/images/3scale-operator.png).
+
 Set the cluster wildcard domain in `3scale/APIManager_3scale.yaml`
 
 Example wildcard domain: `apps.cluster-8glcz.8glcz.sandbox730.opentlc.com`
@@ -50,8 +52,11 @@ oc apply -f 3scale/APIManager_3scale.yaml -n 3scale
 2. Install Jaeger operator all namespaces
 3. Install Kiali operator all namespaces
 4. Install OpenShift Service Mesh operator all namespaces
+
+![3scale operator](support/images/installed-operators.png).
+
 5. Create a namespace for the service mesh control plane
-5. Provision a control plane (see below)
+6. Provision a control plane (see below)
 
 ```
 oc new-project istio-system
@@ -78,8 +83,10 @@ oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/
 You can now verify that the bookinfo service is responding:
 
 ```
-curl -v http://istio-ingressgateway-istio-system.{cluster wildcard url}/productpage
+curl -I http://istio-ingressgateway-istio-system.{cluster wildcard url}/productpage
 ```
+
+You should see `200` as HTTP code.
 
 ### Configure BookInfo 3scale Product
 
@@ -98,7 +105,19 @@ NOTE: You will find the admin username and password in a secret called `system-s
 
 #### Configure 3scale URLs
 
-Find the URLs for the 3scale-admin and backend-3scale routes in the `3scale` namespace. Substitute those URLs into the ServiceEntry resources.
+Find the URLs for the 3scale-admin and backend-3scale routes in the `3scale` namespace. Substitute those URLs into the ServiceEntry resources (Line 7).
+
+```
+  - system-provider.3scale.svc.cluster.local
+```
+
+and 
+
+```
+  - backend-listener.3scale.svc.cluster.local
+```
+
+Apply the configuration:
 
 ```
 oc apply -f bookinfo/ServiceEntry_system-entry.yaml -f bookinfo/ServiceEntry_backend-entry.yaml -n bookinfo
@@ -106,7 +125,7 @@ oc apply -f bookinfo/ServiceEntry_system-entry.yaml -f bookinfo/ServiceEntry_bac
 
 #### Configure system token
 
-Copy the `ADMIN_ACCESS_TOKEN` key of the `system-seed` secret in the `3scale` namespace and replace the value of `spec.config.system.token` in `bookinfo/ServiceMeshExtension_bookinfo.yaml`
+Copy the `ADMIN_ACCESS_TOKEN` key of the `system-seed` secret in the `3scale` namespace and replace the value of `spec.config.system.token` (Line 16) in `bookinfo/ServiceMeshExtension_bookinfo.yaml`
 
 #### Configure service
 
@@ -116,7 +135,9 @@ Use 3scale admin access token along with the 3scale product ID from the 3scale p
 curl https://3scale-admin.{cluster wildcard url}/admin/api/services/{product id}/proxy/configs/production/latest.json?access_token={access token} | jq '.proxy_config.content.backend_authentication_value'
 ```
 
-The output will be the service token. Modify the `id` and `token` of the `spec.config.services` entry in `bookinfo/ServiceMeshExtension_bookinfo.yaml`. The `id` value should be the product ID.
+The output will be the service token. Modify the `id` and `token` of the `spec.config.services` (line 33) entry in `bookinfo/ServiceMeshExtension_bookinfo.yaml`. The `id` value should be the product ID.
+
+![3scale product id](support/images/product-id.png).
 
 #### Apply extension
 
@@ -126,13 +147,17 @@ oc apply -f bookinfo/ServiceMeshExtension_bookinfo.yaml -n bookinfo
 
 ### Authorize an Application to Consume the API
 
-1. In 3scale, go to Audience
-2. Choose an account to authorize (you can use the default Developer account)
-3. Follow the Link at the top of the page that says `N Applications` (N being the number of applications the account has)
-4. Click Create Application
-5. Select the target application plan and provide a name, then create
+1. In 3scale, go to the Product overview
+2. Select `Applications > Listing` in the side menu
+3. Click on `Create Application` in the top right corner
+
+![3scale create application](support/images/3scale-create-application.png).
+
+2. Fill the form and create the application
 
 You should now have an API key that you can copy and use for authorization
+
+![3scale new application](support/images/3scale-new-application.png).
 
 ### Verify the policy enforcement
 
@@ -142,7 +167,7 @@ Access without credentials:
 curl -v http://istio-ingressgateway-istio-system.{cluster wildcard url}/productpage`
 ```
 
-You should see an HTTP 401 response.
+You should see an HTTP 403 response.
 
 Access with credentials (from the previous step):
 
@@ -151,6 +176,8 @@ curl -v http://istio-ingressgateway-istio-system.{cluster wildcard url}/productp
 ```
 
 You should see an HTTP 200 response.
+
+![Test](support/images/policy-enforcement-test.png).
 
 ## Enable OIDC Authentication Flow
 
