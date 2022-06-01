@@ -83,7 +83,7 @@ oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/
 You can now verify that the bookinfo service is responding:
 
 ```
-curl -I http://istio-ingressgateway-istio-system.{cluster wildcard url}/productpage
+curl -v http://istio-ingressgateway-istio-system.{cluster wildcard url}/productpage
 ```
 
 You should see `200` as HTTP code.
