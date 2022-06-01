@@ -46,6 +46,10 @@ Example wildcard domain: `apps.cluster-8glcz.8glcz.sandbox730.opentlc.com`
 oc apply -f 3scale/APIManager_3scale.yaml -n 3scale
 ```
 
+You should see a screen like this:
+
+![3Scale Project Overview](support/images/3scale-project-overview.png).
+
 ## Provision OpenShift Service Mesh
 
 1. Install Elasticsearch operator all namespaces
@@ -62,6 +66,11 @@ oc apply -f 3scale/APIManager_3scale.yaml -n 3scale
 oc new-project istio-system
 oc apply -f istio-system/ServiceMeshControlPlane_basic.yaml -n istio-system
 ```
+
+You should see a screen like this:
+
+![Istio System Project Overview](support/images/istio-system-project-overview.png).
+
 ## Provision BookInfo demo
 
 ### Deploy BookInfo
@@ -79,6 +88,11 @@ Provision the bookinfo application.
 oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/bookinfo/platform/kube/bookinfo.yaml -n bookinfo
 oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/bookinfo/networking/bookinfo-gateway.yaml -n bookinfo
 ```
+
+You should see a screen like this:
+
+![Bookinfo Project Overview](support/images/bookinfo-project-overview.png).
+
 
 You can now verify that the bookinfo service is responding:
 
@@ -188,10 +202,13 @@ Install the Red Hat SSO operator into the `keycloak` namespace.
 Provision an instance of Keycloak.
 
 ```
+oc new-project keycloak
 oc apply -f keycloak/Keycloak_keycloak.yaml -n keycloak
 ```
 
 Wait for all pods to be in a running state.
+
+![Keycloak project overview](support/images/keycloak-project-overview.png).
 
 NOTE: The URL to the Keycloak admin console can be found by listing the routes in the `keycloak` namespace, and the administrator credentials can be found in the secret called `credential-keycloak`
 
@@ -214,6 +231,8 @@ To add the permissions in the Red Hat SSO UI:
 3. Select the `Service Account Roles` tab
 4. Select `realm-management` from the `Client Roles` dropdown
 5. Select `manage-clients` from the `Available Roles` and add it to `Assigned Roles`
+
+![Keycloak Manage Roles](support/images/keycloak-manage-roles.png).
 
 ### Service Mesh OIDC Integration
 
