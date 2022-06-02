@@ -48,7 +48,7 @@ oc apply -f 3scale/APIManager_3scale.yaml -n 3scale
 
 You should see a screen like this:
 
-![3Scale Project Overview](support/images/3scale-project-overview.png).
+![3Scale Project Overview](support/images/3scale-project-overview.png)
 
 ## Provision OpenShift Service Mesh
 
@@ -151,7 +151,7 @@ curl https://3scale-admin.{cluster wildcard url}/admin/api/services/{product id}
 
 The output will be the service token. Modify the `id` and `token` of the `spec.config.services` (line 33) entry in `bookinfo/ServiceMeshExtension_bookinfo.yaml`. The `id` value should be the product ID.
 
-![3scale product id](support/images/product-id.png).
+![3scale product id](support/images/product-id.png)
 
 #### Apply extension
 
@@ -165,13 +165,13 @@ oc apply -f bookinfo/ServiceMeshExtension_bookinfo.yaml -n bookinfo
 2. Select `Applications > Listing` in the side menu
 3. Click on `Create Application` in the top right corner
 
-![3scale create application](support/images/3scale-create-application.png).
+![3scale create application](support/images/3scale-create-application.png)
 
 2. Fill the form and create the application
 
 You should now have an API key that you can copy and use for authorization
 
-![3scale new application](support/images/3scale-new-application.png).
+![3scale new application](support/images/3scale-new-application.png)
 
 ### Verify the policy enforcement
 
@@ -191,7 +191,7 @@ curl -v http://istio-ingressgateway-istio-system.{cluster wildcard url}/productp
 
 You should see an HTTP 200 response.
 
-![Test](support/images/policy-enforcement-test.png).
+![Test](support/images/policy-enforcement-test.png)
 
 ## Enable OIDC Authentication Flow
 
@@ -208,7 +208,7 @@ oc apply -f keycloak/Keycloak_keycloak.yaml -n keycloak
 
 Wait for all pods to be in a running state.
 
-![Keycloak project overview](support/images/keycloak-project-overview.png).
+![Keycloak project overview](support/images/keycloak-project-overview.png)
 
 NOTE: The URL to the Keycloak admin console can be found by listing the routes in the `keycloak` namespace, and the administrator credentials can be found in the secret called `credential-keycloak`
 
@@ -232,7 +232,7 @@ To add the permissions in the Red Hat SSO UI:
 4. Select `realm-management` from the `Client Roles` dropdown
 5. Select `manage-clients` from the `Available Roles` and add it to `Assigned Roles`
 
-![Keycloak Manage Roles](support/images/keycloak-manage-roles.png).
+![Keycloak Manage Roles](support/images/keycloak-manage-roles.png)
 
 ### Service Mesh OIDC Integration
 
@@ -255,19 +255,19 @@ NOTE: You will find the admin username and password in a secret called `system-s
 8. Go to Applications->Application Plans and publish the application plan
 9. Go to the Product Overview and take note of the ID given to the API by searching for text `ID for API calls is`(This will be used in later steps)
 
-![3Scale create product](support/images/3scale-create-product.png).
+![3Scale create product](support/images/3scale-create-product.png)
 
-![3Scale settings OIDC](support/images/3scale-settings-01.png).
+![3Scale settings OIDC](support/images/3scale-settings-01.png)
 
-![3Scale settings OIDC](support/images/3scale-settings-02.png).
+![3Scale settings OIDC](support/images/3scale-settings-02.png)
 
-![3Scale configuration](support/images/3scale-configuration.png).
+![3Scale configuration](support/images/3scale-configuration.png)
 
-![3Scale application plan](support/images/3scale-application-plan.png).
+![3Scale application plan](support/images/3scale-application-plan.png)
 
-![3Scale application plan](support/images/3scale-application-plan-publish.png).
+![3Scale application plan](support/images/3scale-application-plan-publish.png)
 
-![3Scale bookinfo oidc overview](support/images/bookinfo-overview-oidc.png).
+![3Scale bookinfo oidc overview](support/images/bookinfo-overview-oidc.png)
 
 #### Enable API Policy Management for BookInfo
 
