@@ -199,6 +199,8 @@ You should see an HTTP 200 response.
 
 Install the Red Hat SSO operator into the `keycloak` namespace.
 
+![RHSSO operator](support/images/rhsso-operator.png)
+
 Provision an instance of Keycloak.
 
 ```
