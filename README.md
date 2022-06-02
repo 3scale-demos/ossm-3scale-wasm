@@ -255,6 +255,20 @@ NOTE: You will find the admin username and password in a secret called `system-s
 8. Go to Applications->Application Plans and publish the application plan
 9. Go to the Product Overview and take note of the ID given to the API by searching for text `ID for API calls is`(This will be used in later steps)
 
+![3Scale create product](support/images/3scale-create-product.png).
+
+![3Scale settings OIDC](support/images/3scale-settings-01.png).
+
+![3Scale settings OIDC](support/images/3scale-settings-02.png).
+
+![3Scale configuration](support/images/3scale-configuration.png).
+
+![3Scale application plan](support/images/3scale-application-plan.png).
+
+![3Scale application plan](support/images/3scale-application-plan-publish.png).
+
+![3Scale bookinfo oidc overview](support/images/bookinfo-overview-oidc.png).
+
 #### Enable API Policy Management for BookInfo
 
 If the `Service Entry` for 3scale system-provider and backend are not created earlier then please perform the below step
