@@ -36,7 +36,7 @@ oc get storageclasses
 
 Install 3scale operator into `3scale` namespace. (Create new namespace)
 
-![3scale operator](support/images/3scale-operator.png).
+![3scale operator](support/images/3scale-operator.png)
 
 Set the cluster wildcard domain in `3scale/APIManager_3scale.yaml`
 
@@ -57,7 +57,7 @@ You should see a screen like this:
 3. Install Kiali operator all namespaces
 4. Install OpenShift Service Mesh operator all namespaces
 
-![3scale operator](support/images/installed-operators.png).
+![3scale operator](support/images/installed-operators.png)
 
 5. Create a namespace for the service mesh control plane
 6. Provision a control plane (see below)
@@ -69,7 +69,7 @@ oc apply -f istio-system/ServiceMeshControlPlane_basic.yaml -n istio-system
 
 You should see a screen like this:
 
-![Istio System Project Overview](support/images/istio-system-project-overview.png).
+![Istio System Project Overview](support/images/istio-system-project-overview.png)
 
 ## Provision BookInfo demo
 
@@ -91,7 +91,7 @@ oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/
 
 You should see a screen like this:
 
-![Bookinfo Project Overview](support/images/bookinfo-project-overview.png).
+![Bookinfo Project Overview](support/images/bookinfo-project-overview.png)
 
 
 You can now verify that the bookinfo service is responding:
